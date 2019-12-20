@@ -1,0 +1,25 @@
+{
+  "type": "panel",
+  "name": "Openlayers Panel",
+  "id": "openlayers-panel",
+  "dataFormats": ["table"],
+  "info": {
+    "description": "React map panel using openlayers",
+    "author": {
+      "name": "Nam Le"
+    },
+    "keywords": ["openlayers", "map"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "screenshots": [],
+    "version": "0.0.1",
+    "updated": "%TODAY%"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.3.x",
+    "plugins": []
+  }
+}

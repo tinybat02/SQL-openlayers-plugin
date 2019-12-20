@@ -1,0 +1,25 @@
+{
+  "name": "openlayers-panel",
+  "version": "1.0.0",
+  "description": "Grafana Openlayers Panel",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Nam Le",
+  "license": "MIT",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next"
+  },
+  "dependencies": {
+    "@types/nanoid": "^2.1.0",
+    "@types/ol": "^5.3.6",
+    "@types/react-dom": "^16.9.4",
+    "nanoid": "^2.1.8",
+    "ol": "^6.1.1"
+  }
+}

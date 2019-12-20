@@ -1,0 +1,18 @@
+.ol-custom-control {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9em;
+  right: 5px;
+  top: 10px;
+}
+
+.ol-custom-control select {
+  background-color: rgba(0, 60, 136, 0.5);
+  border: none;
+  border-radius: 2px;
+  padding-left: 10px;
+  color: #fff;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
