@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import { PanelProps } from '@grafana/data';
-import { MapOptions } from '../types';
+import { MapOptions, FieldBuffer, Frame } from '../types';
 import 'ol/ol.css';
 import { Map, View } from 'ol';
 import XYZ from 'ol/source/XYZ';
@@ -36,12 +36,15 @@ export class MainPanel extends PureComponent<Props> {
       heat_blur,
       heat_opacity,
     } = this.props.options;
-    const { fields } = this.props.data.series[0];
+
+    const fields = this.props.data.series[0].fields as FieldBuffer[];
+
     const carto = new TileLayer({
       source: new XYZ({
         url: 'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
       }),
     });
+
     this.map = new Map({
       layers: [carto],
       view: new View({
@@ -61,7 +64,7 @@ export class MainPanel extends PureComponent<Props> {
       this.map.addLayer(this.randomTile);
     }
 
-    const vectorSource = processData(this.props.data.series[0]);
+    const vectorSource = processData(this.props.data.series[0] as Frame);
 
     if (markersLayer) {
       this.markersLayer = new VectorLayer({
@@ -86,7 +89,7 @@ export class MainPanel extends PureComponent<Props> {
         source: vectorSource,
         blur: parseInt(heat_blur, 10),
         radius: parseInt(heat_radius, 10),
-        opacity: heat_opacity,
+        opacity: parseFloat(heat_opacity),
         zIndex: 2,
       });
       this.map.addLayer(this.heatmapLayer);
@@ -108,14 +111,11 @@ export class MainPanel extends PureComponent<Props> {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
       const { markersLayer, marker_radius, marker_color, marker_stroke, heatmapLayer, heat_blur, heat_radius, heat_opacity } = this.props.options;
 
-      if (this.markersLayer) {
-        this.map.removeLayer(this.markersLayer);
-      }
-      if (this.heatmapLayer) {
-        this.map.removeLayer(this.heatmapLayer);
-      }
+      //remove existing layers
+      this.map.removeLayer(this.markersLayer);
+      this.map.removeLayer(this.heatmapLayer);
 
-      const vectorSource = processData(this.props.data.series[0]);
+      const vectorSource = processData(this.props.data.series[0] as Frame);
 
       if (markersLayer) {
         this.markersLayer = new VectorLayer({
@@ -140,7 +140,7 @@ export class MainPanel extends PureComponent<Props> {
           source: vectorSource,
           blur: parseInt(heat_blur, 10),
           radius: parseInt(heat_radius, 10),
-          opacity: heat_opacity,
+          opacity: parseFloat(heat_opacity),
           zIndex: 2,
         });
         this.map.addLayer(this.heatmapLayer);
@@ -148,12 +148,11 @@ export class MainPanel extends PureComponent<Props> {
     }
 
     if (prevProps.options.markersLayer !== this.props.options.markersLayer && this.props.options.markersLayer) {
-      if (this.heatmapLayer) {
-        this.map.removeLayer(this.heatmapLayer);
-      }
+      this.map.removeLayer(this.heatmapLayer);
 
       const { marker_radius, marker_color, marker_stroke } = this.props.options;
-      const vectorSource = processData(this.props.data.series[0]);
+      const vectorSource = processData(this.props.data.series[0] as Frame);
+
       this.markersLayer = new VectorLayer({
         source: vectorSource,
         zIndex: 2,
@@ -172,18 +171,16 @@ export class MainPanel extends PureComponent<Props> {
     }
 
     if (prevProps.options.heatmapLayer !== this.props.options.heatmapLayer && this.props.options.heatmapLayer) {
-      if (this.markersLayer) {
-        this.map.removeLayer(this.markersLayer);
-      }
+      this.map.removeLayer(this.markersLayer);
 
       const { heat_radius, heat_blur, heat_opacity } = this.props.options;
-      const vectorSource = processData(this.props.data.series[0]);
+      const vectorSource = processData(this.props.data.series[0] as Frame);
 
       this.heatmapLayer = new Heatmap({
         source: vectorSource,
         blur: parseInt(heat_blur, 10),
         radius: parseInt(heat_radius, 10),
-        opacity: heat_opacity,
+        opacity: parseFloat(heat_opacity),
         zIndex: 2,
       });
       this.map.addLayer(this.heatmapLayer);
@@ -193,6 +190,7 @@ export class MainPanel extends PureComponent<Props> {
       if (this.randomTile) {
         this.map.removeLayer(this.randomTile);
       }
+
       if (this.props.options.tile_url !== '') {
         this.randomTile = new TileLayer({
           source: new XYZ({
@@ -218,7 +216,7 @@ export class MainPanel extends PureComponent<Props> {
 
         this.heatmapLayer.setRadius(parseInt(heat_radius, 10));
         this.heatmapLayer.setBlur(parseInt(heat_blur, 10));
-        this.heatmapLayer.setOpacity(heat_opacity);
+        this.heatmapLayer.setOpacity(parseFloat(heat_opacity));
       }
     }
 
@@ -230,6 +228,7 @@ export class MainPanel extends PureComponent<Props> {
       if (this.props.options.markersLayer) {
         const { marker_radius, marker_color, marker_stroke } = this.props.options;
         this.map.removeLayer(this.markersLayer);
+
         this.markersLayer.setStyle(
           new Style({
             image: new CircleStyle({

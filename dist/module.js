@@ -52917,7 +52917,7 @@ function (_super) {
         source: vectorSource,
         blur: parseInt(heat_blur, 10),
         radius: parseInt(heat_radius, 10),
-        opacity: heat_opacity,
+        opacity: parseFloat(heat_opacity),
         zIndex: 2
       });
       this.map.addLayer(this.heatmapLayer);
@@ -52950,16 +52950,10 @@ function (_super) {
           heatmapLayer = _a.heatmapLayer,
           heat_blur = _a.heat_blur,
           heat_radius = _a.heat_radius,
-          heat_opacity = _a.heat_opacity;
+          heat_opacity = _a.heat_opacity; //remove existing layers
 
-      if (this.markersLayer) {
-        this.map.removeLayer(this.markersLayer);
-      }
-
-      if (this.heatmapLayer) {
-        this.map.removeLayer(this.heatmapLayer);
-      }
-
+      this.map.removeLayer(this.markersLayer);
+      this.map.removeLayer(this.heatmapLayer);
       var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processData"])(this.props.data.series[0]);
 
       if (markersLayer) {
@@ -52987,7 +52981,7 @@ function (_super) {
           source: vectorSource,
           blur: parseInt(heat_blur, 10),
           radius: parseInt(heat_radius, 10),
-          opacity: heat_opacity,
+          opacity: parseFloat(heat_opacity),
           zIndex: 2
         });
         this.map.addLayer(this.heatmapLayer);
@@ -52995,10 +52989,7 @@ function (_super) {
     }
 
     if (prevProps.options.markersLayer !== this.props.options.markersLayer && this.props.options.markersLayer) {
-      if (this.heatmapLayer) {
-        this.map.removeLayer(this.heatmapLayer);
-      }
-
+      this.map.removeLayer(this.heatmapLayer);
       var _b = this.props.options,
           marker_radius = _b.marker_radius,
           marker_color = _b.marker_color,
@@ -53024,10 +53015,7 @@ function (_super) {
     }
 
     if (prevProps.options.heatmapLayer !== this.props.options.heatmapLayer && this.props.options.heatmapLayer) {
-      if (this.markersLayer) {
-        this.map.removeLayer(this.markersLayer);
-      }
-
+      this.map.removeLayer(this.markersLayer);
       var _c = this.props.options,
           heat_radius = _c.heat_radius,
           heat_blur = _c.heat_blur,
@@ -53037,7 +53025,7 @@ function (_super) {
         source: vectorSource,
         blur: parseInt(heat_blur, 10),
         radius: parseInt(heat_radius, 10),
-        opacity: heat_opacity,
+        opacity: parseFloat(heat_opacity),
         zIndex: 2
       });
       this.map.addLayer(this.heatmapLayer);
@@ -53071,7 +53059,7 @@ function (_super) {
             heat_opacity = _d.heat_opacity;
         this.heatmapLayer.setRadius(parseInt(heat_radius, 10));
         this.heatmapLayer.setBlur(parseInt(heat_blur, 10));
-        this.heatmapLayer.setOpacity(heat_opacity);
+        this.heatmapLayer.setOpacity(parseFloat(heat_opacity));
       }
     }
 
@@ -53405,7 +53393,7 @@ var defaults = {
   marker_stroke: 'deepskyblue',
   heat_blur: '15',
   heat_radius: '5',
-  heat_opacity: 0.9
+  heat_opacity: '0.9'
 };
 
 /***/ }),
