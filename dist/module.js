@@ -52857,6 +52857,7 @@ function (_super) {
     var _a = this.props.options,
         tile_url = _a.tile_url,
         zoom_level = _a.zoom_level,
+        max_zoom = _a.max_zoom,
         heatmapLayer = _a.heatmapLayer,
         markersLayer = _a.markersLayer,
         marker_radius = _a.marker_radius,
@@ -52868,17 +52869,30 @@ function (_super) {
     var fields = this.props.data.series[0].fields;
     var carto = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Tile"]({
       source: new ol_source_XYZ__WEBPACK_IMPORTED_MODULE_5__["default"]({
-        url: 'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
       })
     });
-    this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
-      layers: [carto],
-      view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
-        center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
-        zoom: zoom_level
-      }),
-      target: this.id
-    });
+
+    if (fields[2].values.buffer.length === 0) {
+      this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
+        layers: [carto],
+        view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
+          center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([11.66725, 48.262725]),
+          zoom: zoom_level
+        }),
+        target: this.id
+      });
+    } else {
+      this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
+        layers: [carto],
+        view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
+          center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
+          zoom: zoom_level,
+          maxZoom: max_zoom
+        }),
+        target: this.id
+      });
+    }
 
     if (tile_url !== '') {
       this.randomTile = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Tile"]({
@@ -52950,7 +52964,17 @@ function (_super) {
           heatmapLayer = _a.heatmapLayer,
           heat_blur = _a.heat_blur,
           heat_radius = _a.heat_radius,
-          heat_opacity = _a.heat_opacity; //remove existing layers
+          heat_opacity = _a.heat_opacity;
+      var prevFields = prevProps.data.series[0].fields;
+      var newFields = this.props.data.series[0].fields;
+
+      if (prevFields[1].values.buffer.length === 0 && newFields[1].values.buffer.length !== 0) {
+        this.map.getView().animate({
+          center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([newFields[2].values.buffer[0], newFields[1].values.buffer[0]]),
+          duration: 2000
+        });
+      } //remove existing layers
+
 
       this.map.removeLayer(this.markersLayer);
       this.map.removeLayer(this.heatmapLayer);
@@ -53193,6 +53217,14 @@ var PanelEditor = function PanelEditor(_a) {
     name: "zoom_level",
     value: inputs.zoom_level,
     onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    label: "Max Zoom",
+    labelWidth: 10,
+    inputWidth: 40,
+    type: "number",
+    name: "max_zoom",
+    value: inputs.max_zoom,
+    onChange: handleChange
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "gf-form"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -53274,7 +53306,7 @@ var PanelEditor = function PanelEditor(_a) {
     value: inputs.heat_opacity,
     onChange: handleChange
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "btn btn-outline-primary",
+    className: "btn btn-inverse",
     onClick: handleSubmit
   }, "Submit"));
 };
@@ -53386,6 +53418,7 @@ __webpack_require__.r(__webpack_exports__);
 var defaults = {
   tile_url: '',
   zoom_level: 18,
+  max_zoom: 20,
   markersLayer: false,
   heatmapLayer: true,
   marker_radius: 5,

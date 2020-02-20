@@ -27,6 +27,7 @@ export class MainPanel extends PureComponent<Props> {
     const {
       tile_url,
       zoom_level,
+      max_zoom,
       heatmapLayer,
       markersLayer,
       marker_radius,
@@ -41,18 +42,30 @@ export class MainPanel extends PureComponent<Props> {
 
     const carto = new TileLayer({
       source: new XYZ({
-        url: 'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
       }),
     });
 
-    this.map = new Map({
-      layers: [carto],
-      view: new View({
-        center: fromLonLat([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
-        zoom: zoom_level,
-      }),
-      target: this.id,
-    });
+    if (fields[2].values.buffer.length === 0) {
+      this.map = new Map({
+        layers: [carto],
+        view: new View({
+          center: fromLonLat([11.66725, 48.262725]),
+          zoom: zoom_level,
+        }),
+        target: this.id,
+      });
+    } else {
+      this.map = new Map({
+        layers: [carto],
+        view: new View({
+          center: fromLonLat([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
+          zoom: zoom_level,
+          maxZoom: max_zoom,
+        }),
+        target: this.id,
+      });
+    }
 
     if (tile_url !== '') {
       this.randomTile = new TileLayer({
@@ -110,6 +123,15 @@ export class MainPanel extends PureComponent<Props> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
       const { markersLayer, marker_radius, marker_color, marker_stroke, heatmapLayer, heat_blur, heat_radius, heat_opacity } = this.props.options;
+
+      const prevFields = prevProps.data.series[0].fields as FieldBuffer[];
+      const newFields = this.props.data.series[0].fields as FieldBuffer[];
+      if (prevFields[1].values.buffer.length === 0 && newFields[1].values.buffer.length !== 0) {
+        this.map.getView().animate({
+          center: fromLonLat([newFields[2].values.buffer[0], newFields[1].values.buffer[0]]),
+          duration: 2000,
+        });
+      }
 
       //remove existing layers
       this.map.removeLayer(this.markersLayer);

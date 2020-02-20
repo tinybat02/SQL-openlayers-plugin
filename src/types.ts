@@ -3,6 +3,7 @@ import { DataFrame, Field, Vector } from '@grafana/data';
 export interface MapOptions {
   tile_url: string;
   zoom_level: number;
+  max_zoom: number;
   markersLayer: boolean;
   heatmapLayer: boolean;
   marker_radius: number;
@@ -16,6 +17,7 @@ export interface MapOptions {
 export const defaults: MapOptions = {
   tile_url: '',
   zoom_level: 18,
+  max_zoom: 20,
   markersLayer: false,
   heatmapLayer: true,
   marker_radius: 5,

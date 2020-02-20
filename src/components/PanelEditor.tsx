@@ -72,6 +72,9 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
             value={inputs.zoom_level}
             onChange={handleChange}
           />
+
+          <FormField label="Max Zoom" labelWidth={10} inputWidth={40} type="number" name="max_zoom" value={inputs.max_zoom} onChange={handleChange} />
+
           <div className="gf-form">
             <label className="gf-form-label width-10">Markers</label>
             <div className="gf-form-switch" onClick={showMarkers}>
@@ -151,7 +154,7 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
         </div>
       </div>
 
-      <button className="btn btn-outline-primary" onClick={handleSubmit}>
+      <button className="btn btn-inverse" onClick={handleSubmit}>
         Submit
       </button>
     </PanelOptionsGroup>
