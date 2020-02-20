@@ -7,11 +7,11 @@
 }
 
 .ol-custom-control select {
-  background-color: rgba(0, 60, 136, 0.5);
+  /*   background-color: rgba(0, 60, 136, 0.5); */
   border: none;
   border-radius: 2px;
   padding-left: 10px;
-  color: #fff;
+  /*   color: #fff; */
   vertical-align: middle;
   -webkit-appearance: none;
   -moz-appearance: none;
