@@ -52888,7 +52888,7 @@ function (_super) {
               return event.originalEvent.touches.length === 2;
             }
 
-            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event);
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event) || false;
           }
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
@@ -52911,7 +52911,7 @@ function (_super) {
               return event.originalEvent.touches.length === 2;
             }
 
-            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event);
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event) || false;
           }
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]

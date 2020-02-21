@@ -56,7 +56,7 @@ export class MainPanel extends PureComponent<Props> {
               if (event.originalEvent.touches) {
                 return event.originalEvent.touches.length === 2;
               }
-              return platformModifierKeyOnly(event);
+              return platformModifierKeyOnly(event) || false;
             },
           }),
           new MouseWheelZoom({
@@ -78,7 +78,7 @@ export class MainPanel extends PureComponent<Props> {
               if (event.originalEvent.touches) {
                 return event.originalEvent.touches.length === 2;
               }
-              return platformModifierKeyOnly(event);
+              return platformModifierKeyOnly(event) || false;
             },
           }),
           new MouseWheelZoom({
