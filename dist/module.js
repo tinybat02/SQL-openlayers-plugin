@@ -52883,13 +52883,7 @@ function (_super) {
           dragPan: false,
           mouseWheelZoom: false
         }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
-          condition: function condition(event) {
-            if (event.originalEvent.touches) {
-              return event.originalEvent.touches.length === 2;
-            }
-
-            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event) || false;
-          }
+          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
         })]),
@@ -52906,13 +52900,7 @@ function (_super) {
           dragPan: false,
           mouseWheelZoom: false
         }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
-          condition: function condition(event) {
-            if (event.originalEvent.touches) {
-              return event.originalEvent.touches.length === 2;
-            }
-
-            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event) || false;
-          }
+          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
         })]),

@@ -52,12 +52,7 @@ export class MainPanel extends PureComponent<Props> {
       this.map = new Map({
         interactions: defaults({ dragPan: false, mouseWheelZoom: false }).extend([
           new DragPan({
-            condition: (event: any) => {
-              if (event.originalEvent.touches) {
-                return event.originalEvent.touches.length === 2;
-              }
-              return platformModifierKeyOnly(event) || false;
-            },
+            condition: platformModifierKeyOnly,
           }),
           new MouseWheelZoom({
             condition: platformModifierKeyOnly,
@@ -74,12 +69,7 @@ export class MainPanel extends PureComponent<Props> {
       this.map = new Map({
         interactions: defaults({ dragPan: false, mouseWheelZoom: false }).extend([
           new DragPan({
-            condition: (event: any) => {
-              if (event.originalEvent.touches) {
-                return event.originalEvent.touches.length === 2;
-              }
-              return platformModifierKeyOnly(event) || false;
-            },
+            condition: platformModifierKeyOnly,
           }),
           new MouseWheelZoom({
             condition: platformModifierKeyOnly,
