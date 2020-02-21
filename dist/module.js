@@ -52879,14 +52879,17 @@ function (_super) {
 
     if (fields[2].values.buffer.length === 0) {
       this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
-        interactions: Object(ol_interaction__WEBPACK_IMPORTED_MODULE_11__["defaults"])({
-          dragPan: false,
-          mouseWheelZoom: false
-        }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
-          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
+        interactions: [new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
+          condition: function condition(olBrowserEvent) {
+            if (olBrowserEvent.originalEvent.touches) {
+              return olBrowserEvent.originalEvent.touches.length === 2;
+            }
+
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(olBrowserEvent);
+          }
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
-        })]),
+        })],
         layers: [carto],
         view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
           center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([11.66725, 48.262725]),
@@ -52896,14 +52899,17 @@ function (_super) {
       });
     } else {
       this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
-        interactions: Object(ol_interaction__WEBPACK_IMPORTED_MODULE_11__["defaults"])({
-          dragPan: false,
-          mouseWheelZoom: false
-        }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
-          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
+        interactions: [new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
+          condition: function condition(olBrowserEvent) {
+            if (olBrowserEvent.originalEvent.touches) {
+              return olBrowserEvent.originalEvent.touches.length === 2;
+            }
+
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(olBrowserEvent);
+          }
         }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
           condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
-        })]),
+        })],
         layers: [carto],
         view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
           center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
