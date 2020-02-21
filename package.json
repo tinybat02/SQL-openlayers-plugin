@@ -11,15 +11,15 @@
   "author": "Nam Le",
   "license": "MIT",
   "devDependencies": {
-    "@grafana/data": "next",
-    "@grafana/toolkit": "next",
-    "@grafana/ui": "next"
+    "@grafana/data": "^6.6.2",
+    "@grafana/toolkit": "^6.6.2",
+    "@grafana/ui": "^6.6.2"
   },
   "dependencies": {
     "@types/nanoid": "^2.1.0",
-    "@types/ol": "^5.3.6",
-    "@types/react-dom": "^16.9.4",
-    "nanoid": "^2.1.8",
-    "ol": "^6.1.1"
+    "@types/ol": "^5.3.7",
+    "@types/react-dom": "^16.9.5",
+    "nanoid": "^2.1.11",
+    "ol": "^6.2.1"
   }
 }
