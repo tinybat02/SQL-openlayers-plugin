@@ -10,6 +10,8 @@ import { fromLonLat } from 'ol/proj';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 import Heatmap from 'ol/layer/Heatmap';
 import Control from 'ol/control/Control';
+import { defaults, DragPan, MouseWheelZoom } from 'ol/interaction';
+import { platformModifierKeyOnly } from 'ol/events/condition';
 import nanoid from 'nanoid';
 import { processData } from './utils/helpers';
 import '../style/MainPanel.css';
@@ -48,6 +50,19 @@ export class MainPanel extends PureComponent<Props> {
 
     if (fields[2].values.buffer.length === 0) {
       this.map = new Map({
+        interactions: defaults({ dragPan: false, mouseWheelZoom: false }).extend([
+          new DragPan({
+            condition: (event: any) => {
+              if (event.originalEvent.touches) {
+                return event.originalEvent.touches.length === 2;
+              }
+              return platformModifierKeyOnly(event);
+            },
+          }),
+          new MouseWheelZoom({
+            condition: platformModifierKeyOnly,
+          }),
+        ]),
         layers: [carto],
         view: new View({
           center: fromLonLat([11.66725, 48.262725]),
@@ -57,6 +72,19 @@ export class MainPanel extends PureComponent<Props> {
       });
     } else {
       this.map = new Map({
+        interactions: defaults({ dragPan: false, mouseWheelZoom: false }).extend([
+          new DragPan({
+            condition: (event: any) => {
+              if (event.originalEvent.touches) {
+                return event.originalEvent.touches.length === 2;
+              }
+              return platformModifierKeyOnly(event);
+            },
+          }),
+          new MouseWheelZoom({
+            condition: platformModifierKeyOnly,
+          }),
+        ]),
         layers: [carto],
         view: new View({
           center: fromLonLat([fields[2].values.buffer[0], fields[1].values.buffer[0]]),

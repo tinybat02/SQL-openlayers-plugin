@@ -52800,11 +52800,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ol/style */ "../node_modules/ol/style.js");
 /* harmony import */ var ol_layer_Heatmap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ol/layer/Heatmap */ "../node_modules/ol/layer/Heatmap.js");
 /* harmony import */ var ol_control_Control__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ol/control/Control */ "../node_modules/ol/control/Control.js");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! nanoid */ "../node_modules/nanoid/index.browser.js");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils/helpers */ "./components/utils/helpers.ts");
-/* harmony import */ var _style_MainPanel_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../style/MainPanel.css */ "./style/MainPanel.css");
-/* harmony import */ var _style_MainPanel_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_MainPanel_css__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var ol_interaction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ol/interaction */ "../node_modules/ol/interaction.js");
+/* harmony import */ var ol_events_condition__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ol/events/condition */ "../node_modules/ol/events/condition.js");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! nanoid */ "../node_modules/nanoid/index.browser.js");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/helpers */ "./components/utils/helpers.ts");
+/* harmony import */ var _style_MainPanel_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../style/MainPanel.css */ "./style/MainPanel.css");
+/* harmony import */ var _style_MainPanel_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_MainPanel_css__WEBPACK_IMPORTED_MODULE_15__);
+
+
 
 
 
@@ -52828,7 +52832,7 @@ function (_super) {
   function MainPanel() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
 
-    _this.id = 'id' + nanoid__WEBPACK_IMPORTED_MODULE_11___default()();
+    _this.id = 'id' + nanoid__WEBPACK_IMPORTED_MODULE_13___default()();
 
     _this.handleSwitch = function (e) {
       var _a = _this.props,
@@ -52875,6 +52879,20 @@ function (_super) {
 
     if (fields[2].values.buffer.length === 0) {
       this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
+        interactions: Object(ol_interaction__WEBPACK_IMPORTED_MODULE_11__["defaults"])({
+          dragPan: false,
+          mouseWheelZoom: false
+        }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
+          condition: function condition(event) {
+            if (event.originalEvent.touches) {
+              return event.originalEvent.touches.length === 2;
+            }
+
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event);
+          }
+        }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
+          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
+        })]),
         layers: [carto],
         view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
           center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([11.66725, 48.262725]),
@@ -52884,6 +52902,20 @@ function (_super) {
       });
     } else {
       this.map = new ol__WEBPACK_IMPORTED_MODULE_4__["Map"]({
+        interactions: Object(ol_interaction__WEBPACK_IMPORTED_MODULE_11__["defaults"])({
+          dragPan: false,
+          mouseWheelZoom: false
+        }).extend([new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["DragPan"]({
+          condition: function condition(event) {
+            if (event.originalEvent.touches) {
+              return event.originalEvent.touches.length === 2;
+            }
+
+            return Object(ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"])(event);
+          }
+        }), new ol_interaction__WEBPACK_IMPORTED_MODULE_11__["MouseWheelZoom"]({
+          condition: ol_events_condition__WEBPACK_IMPORTED_MODULE_12__["platformModifierKeyOnly"]
+        })]),
         layers: [carto],
         view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
           center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([fields[2].values.buffer[0], fields[1].values.buffer[0]]),
@@ -52904,7 +52936,7 @@ function (_super) {
       this.map.addLayer(this.randomTile);
     }
 
-    var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processData"])(this.props.data.series[0]);
+    var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
 
     if (markersLayer) {
       this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
@@ -52978,7 +53010,7 @@ function (_super) {
 
       this.map.removeLayer(this.markersLayer);
       this.map.removeLayer(this.heatmapLayer);
-      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processData"])(this.props.data.series[0]);
+      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
 
       if (markersLayer) {
         this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
@@ -53018,7 +53050,7 @@ function (_super) {
           marker_radius = _b.marker_radius,
           marker_color = _b.marker_color,
           marker_stroke = _b.marker_stroke;
-      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processData"])(this.props.data.series[0]);
+      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
       this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
         source: vectorSource,
         zIndex: 2,
@@ -53044,7 +53076,7 @@ function (_super) {
           heat_radius = _c.heat_radius,
           heat_blur = _c.heat_blur,
           heat_opacity = _c.heat_opacity;
-      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processData"])(this.props.data.series[0]);
+      var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
       this.heatmapLayer = new ol_layer_Heatmap__WEBPACK_IMPORTED_MODULE_9__["default"]({
         source: vectorSource,
         blur: parseInt(heat_blur, 10),
