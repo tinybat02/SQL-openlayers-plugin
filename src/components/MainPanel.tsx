@@ -27,6 +27,8 @@ export class MainPanel extends PureComponent<Props> {
 
   componentDidMount() {
     const {
+      center_lat,
+      center_lon,
       tile_url,
       zoom_level,
       max_zoom,
@@ -62,8 +64,9 @@ export class MainPanel extends PureComponent<Props> {
         ]),
         layers: [carto],
         view: new View({
-          center: fromLonLat([11.66725, 48.262725]),
+          center: fromLonLat([center_lon, center_lat]),
           zoom: zoom_level,
+          maxZoom: max_zoom,
         }),
         target: this.id,
       });

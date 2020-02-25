@@ -53,7 +53,25 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
     <PanelOptionsGroup>
       <div className="editor-row">
         <div className="section gf-form-group">
-          <h5 className="section-heading">Map Visual Options</h5>
+          <h5 className="section-heading">Map Settings</h5>
+          <FormField
+            label="Center Latitude"
+            labelWidth={10}
+            inputWidth={40}
+            type="number"
+            name="center_lat"
+            value={inputs.center_lat}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Center Longitude"
+            labelWidth={10}
+            inputWidth={40}
+            type="number"
+            name="center_lon"
+            value={inputs.center_lon}
+            onChange={handleChange}
+          />
           <FormField
             label="Additional Tile"
             labelWidth={10}
@@ -74,7 +92,10 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
           />
 
           <FormField label="Max Zoom" labelWidth={10} inputWidth={40} type="number" name="max_zoom" value={inputs.max_zoom} onChange={handleChange} />
+        </div>
 
+        <div className="section gf-form-group">
+          <h5 className="section-heading">Feature Layers</h5>
           <div className="gf-form">
             <label className="gf-form-label width-10">Markers</label>
             <div className="gf-form-switch" onClick={showMarkers}>

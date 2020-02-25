@@ -51983,6 +51983,8 @@ function (_super) {
 
   MainPanel.prototype.componentDidMount = function () {
     var _a = this.props.options,
+        center_lat = _a.center_lat,
+        center_lon = _a.center_lon,
         tile_url = _a.tile_url,
         zoom_level = _a.zoom_level,
         max_zoom = _a.max_zoom,
@@ -52016,8 +52018,9 @@ function (_super) {
         })]),
         layers: [carto],
         view: new ol__WEBPACK_IMPORTED_MODULE_4__["View"]({
-          center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([11.66725, 48.262725]),
-          zoom: zoom_level
+          center: Object(ol_proj__WEBPACK_IMPORTED_MODULE_7__["fromLonLat"])([center_lon, center_lat]),
+          zoom: zoom_level,
+          maxZoom: max_zoom
         }),
         target: this.id
       });
@@ -52351,7 +52354,23 @@ var PanelEditor = function PanelEditor(_a) {
     className: "section gf-form-group"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "section-heading"
-  }, "Map Visual Options"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+  }, "Map Settings"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    label: "Center Latitude",
+    labelWidth: 10,
+    inputWidth: 40,
+    type: "number",
+    name: "center_lat",
+    value: inputs.center_lat,
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    label: "Center Longitude",
+    labelWidth: 10,
+    inputWidth: 40,
+    type: "number",
+    name: "center_lon",
+    value: inputs.center_lon,
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     label: "Additional Tile",
     labelWidth: 10,
     inputWidth: 80,
@@ -52375,7 +52394,11 @@ var PanelEditor = function PanelEditor(_a) {
     name: "max_zoom",
     value: inputs.max_zoom,
     onChange: handleChange
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "section gf-form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "section-heading"
+  }, "Feature Layers"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "gf-form"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "gf-form-label width-10"
@@ -52566,6 +52589,8 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaults", function() { return defaults; });
 var defaults = {
+  center_lat: 48.262725,
+  center_lon: 11.66725,
   tile_url: '',
   zoom_level: 18,
   max_zoom: 20,
