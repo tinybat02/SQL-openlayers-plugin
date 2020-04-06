@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@grafana/data": "^6.6.2",
-    "@grafana/toolkit": "^6.6.2",
+    "@grafana/toolkit": "^6.7.2",
     "@grafana/ui": "^6.6.2"
   },
   "dependencies": {
