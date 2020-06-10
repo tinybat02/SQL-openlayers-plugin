@@ -30,7 +30,7 @@ const processData = (data: Frame) => {
           }),
           font: '13px Calibri,sans-serif',
           text: data.fields[0].values.buffer[i],
-          offsetY: -15,
+          offsetY: -5,
         }),
       })
     );
