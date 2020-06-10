@@ -52509,7 +52509,7 @@ var processData = function processData(data) {
     pointFeature.set('user', data.fields[4].values.buffer[i]);
     pointFeature.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_4__["Style"]({
       image: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Circle"]({
-        radius: data.fields[5].values.buffer[i],
+        radius: data.fields[5].values.buffer[i] * 2,
         fill: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Fill"]({
           color: 'rgba(73,168,222,0.6)'
         })
