@@ -117,7 +117,8 @@ export class MainPanel extends PureComponent<Props> {
               width: 1,
             }),
           }),
-        }), */
+        }),
+        */
       });
       this.map.addLayer(this.markersLayer);
     }

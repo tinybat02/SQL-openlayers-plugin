@@ -52491,7 +52491,7 @@ var processData = function processData(data) {
           color: '#fff',
           width: 1
         }),
-        font: '12px Calibri,sans-serif',
+        font: '13px Calibri,sans-serif',
         text: data.fields[4].values.buffer[i],
         offsetY: -15
       })
