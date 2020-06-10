@@ -29,7 +29,7 @@ const processData = (data: Frame) => {
             width: 1,
           }),
           font: '13px Calibri,sans-serif',
-          text: data.fields[4].values.buffer[i],
+          text: data.fields[0].values.buffer[i],
           offsetY: -15,
         }),
       })
