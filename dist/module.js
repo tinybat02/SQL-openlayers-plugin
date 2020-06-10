@@ -52513,6 +52513,15 @@ var processData = function processData(data) {
         fill: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Fill"]({
           color: 'rgba(73,168,222,0.6)'
         })
+      }),
+      text: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Text"]({
+        stroke: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Stroke"]({
+          color: '#fff',
+          width: 2
+        }),
+        font: '14px Calibri,sans-serif',
+        text: data.fields[4].values.buffer[i],
+        offsetY: 0
       })
     }));
     dataPoints.push(pointFeature);

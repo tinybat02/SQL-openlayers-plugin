@@ -3,7 +3,7 @@ import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import { fromLonLat } from 'ol/proj';
 import { Frame } from '../../types';
-import { Circle, Style, Fill } from 'ol/style';
+import { Circle, Style, Fill, Stroke, Text } from 'ol/style';
 
 const processData = (data: Frame) => {
   const dataPoints: Feature[] = [];
@@ -22,6 +22,15 @@ const processData = (data: Frame) => {
         image: new Circle({
           radius: data.fields[5].values.buffer[i] * 2,
           fill: new Fill({ color: 'rgba(73,168,222,0.6)' }),
+        }),
+        text: new Text({
+          stroke: new Stroke({
+            color: '#fff',
+            width: 2,
+          }),
+          font: '14px Calibri,sans-serif',
+          text: data.fields[4].values.buffer[i],
+          offsetY: 0,
         }),
       })
     );
