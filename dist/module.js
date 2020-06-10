@@ -52492,8 +52492,8 @@ var processData = function processData(data) {
           width: 1
         }),
         font: '13px Calibri,sans-serif',
-        text: data.fields[0].values.buffer[i],
-        offsetY: -5
+        text: data.fields[4].values.buffer[i],
+        offsetY: -10
       })
     }));
     dataPoints.push(pointFeature);
