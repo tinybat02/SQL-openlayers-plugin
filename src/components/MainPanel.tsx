@@ -34,9 +34,9 @@ export class MainPanel extends PureComponent<Props> {
       max_zoom,
       heatmapLayer,
       markersLayer,
-      marker_radius,
-      marker_color,
-      marker_stroke,
+      // marker_radius,
+      // marker_color,
+      // marker_stroke,
       heat_radius,
       heat_blur,
       heat_opacity,
@@ -108,7 +108,7 @@ export class MainPanel extends PureComponent<Props> {
       this.markersLayer = new VectorLayer({
         source: vectorSource,
         zIndex: 2,
-        style: new Style({
+        /*         style: new Style({
           image: new CircleStyle({
             radius: marker_radius,
             fill: new Fill({ color: marker_color }),
@@ -117,7 +117,7 @@ export class MainPanel extends PureComponent<Props> {
               width: 1,
             }),
           }),
-        }),
+        }), */
       });
       this.map.addLayer(this.markersLayer);
     }

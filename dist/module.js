@@ -51990,10 +51990,10 @@ function (_super) {
         max_zoom = _a.max_zoom,
         heatmapLayer = _a.heatmapLayer,
         markersLayer = _a.markersLayer,
-        marker_radius = _a.marker_radius,
-        marker_color = _a.marker_color,
-        marker_stroke = _a.marker_stroke,
-        heat_radius = _a.heat_radius,
+        // marker_radius,
+    // marker_color,
+    // marker_stroke,
+    heat_radius = _a.heat_radius,
         heat_blur = _a.heat_blur,
         heat_opacity = _a.heat_opacity;
     var fields = this.props.data.series[0].fields;
@@ -52062,19 +52062,7 @@ function (_super) {
     if (markersLayer) {
       this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
         source: vectorSource,
-        zIndex: 2,
-        style: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Style"]({
-          image: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Circle"]({
-            radius: marker_radius,
-            fill: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Fill"]({
-              color: marker_color
-            }),
-            stroke: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Stroke"]({
-              color: marker_stroke,
-              width: 1
-            })
-          })
-        })
+        zIndex: 2
       });
       this.map.addLayer(this.markersLayer);
     }
@@ -52500,6 +52488,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ol_geom_Point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ol/geom/Point */ "../node_modules/ol/geom/Point.js");
 /* harmony import */ var ol_source_Vector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ol/source/Vector */ "../node_modules/ol/source/Vector.js");
 /* harmony import */ var ol_proj__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ol/proj */ "../node_modules/ol/proj.js");
+/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ol/style */ "../node_modules/ol/style.js");
+
 
 
 
@@ -52509,9 +52499,23 @@ var processData = function processData(data) {
   var dataPoints = [];
 
   for (var i = 0; i < data.length; i++) {
-    dataPoints.push(new ol_Feature__WEBPACK_IMPORTED_MODULE_0__["default"]({
-      geometry: new ol_geom_Point__WEBPACK_IMPORTED_MODULE_1__["default"](Object(ol_proj__WEBPACK_IMPORTED_MODULE_3__["fromLonLat"])([data.fields[2].values.buffer[i], data.fields[1].values.buffer[i]]))
+    // dataPoints.push(
+    //   new Feature({
+    //     geometry: new Point(fromLonLat([data.fields[2].values.buffer[i], data.fields[1].values.buffer[i]])),
+    //   })
+    // );
+    var pointFeature = new ol_Feature__WEBPACK_IMPORTED_MODULE_0__["default"](new ol_geom_Point__WEBPACK_IMPORTED_MODULE_1__["default"](Object(ol_proj__WEBPACK_IMPORTED_MODULE_3__["fromLonLat"])([data.fields[2].values.buffer[i], data.fields[1].values.buffer[i]])));
+    pointFeature.set('time', data.fields[3].values.buffer[i]);
+    pointFeature.set('user', data.fields[4].values.buffer[i]);
+    pointFeature.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_4__["Style"]({
+      image: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Circle"]({
+        radius: data.fields[5].values.buffer[i],
+        fill: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Fill"]({
+          color: 'rgba(73,168,222,0.6)'
+        })
+      })
     }));
+    dataPoints.push(pointFeature);
   }
 
   var vectorSource = new ol_source_Vector__WEBPACK_IMPORTED_MODULE_2__["default"]({
