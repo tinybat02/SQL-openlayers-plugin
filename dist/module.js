@@ -52099,10 +52099,9 @@ function (_super) {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
       var _a = this.props.options,
           markersLayer = _a.markersLayer,
-          marker_radius = _a.marker_radius,
-          marker_color = _a.marker_color,
-          marker_stroke = _a.marker_stroke,
-          heatmapLayer = _a.heatmapLayer,
+
+      /* marker_radius, marker_color, marker_stroke,  */
+      heatmapLayer = _a.heatmapLayer,
           heat_blur = _a.heat_blur,
           heat_radius = _a.heat_radius,
           heat_opacity = _a.heat_opacity;
@@ -52124,19 +52123,7 @@ function (_super) {
       if (markersLayer) {
         this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
           source: vectorSource,
-          zIndex: 2,
-          style: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Style"]({
-            image: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Circle"]({
-              radius: marker_radius,
-              fill: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Fill"]({
-                color: marker_color
-              }),
-              stroke: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Stroke"]({
-                color: marker_stroke,
-                width: 1
-              })
-            })
-          })
+          zIndex: 2
         });
         this.map.addLayer(this.markersLayer);
       }
@@ -52154,37 +52141,22 @@ function (_super) {
     }
 
     if (prevProps.options.markersLayer !== this.props.options.markersLayer && this.props.options.markersLayer) {
-      this.map.removeLayer(this.heatmapLayer);
-      var _b = this.props.options,
-          marker_radius = _b.marker_radius,
-          marker_color = _b.marker_color,
-          marker_stroke = _b.marker_stroke;
+      this.map.removeLayer(this.heatmapLayer); // const { marker_radius, marker_color, marker_stroke } = this.props.options;
+
       var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
       this.markersLayer = new ol_layer__WEBPACK_IMPORTED_MODULE_6__["Vector"]({
         source: vectorSource,
-        zIndex: 2,
-        style: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Style"]({
-          image: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Circle"]({
-            radius: marker_radius,
-            fill: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Fill"]({
-              color: marker_color
-            }),
-            stroke: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Stroke"]({
-              color: marker_stroke,
-              width: 1
-            })
-          })
-        })
+        zIndex: 2
       });
       this.map.addLayer(this.markersLayer);
     }
 
     if (prevProps.options.heatmapLayer !== this.props.options.heatmapLayer && this.props.options.heatmapLayer) {
       this.map.removeLayer(this.markersLayer);
-      var _c = this.props.options,
-          heat_radius = _c.heat_radius,
-          heat_blur = _c.heat_blur,
-          heat_opacity = _c.heat_opacity;
+      var _b = this.props.options,
+          heat_radius = _b.heat_radius,
+          heat_blur = _b.heat_blur,
+          heat_opacity = _b.heat_opacity;
       var vectorSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_14__["processData"])(this.props.data.series[0]);
       this.heatmapLayer = new ol_layer_Heatmap__WEBPACK_IMPORTED_MODULE_9__["default"]({
         source: vectorSource,
@@ -52218,10 +52190,10 @@ function (_super) {
 
     if (prevProps.options.heat_radius !== this.props.options.heat_radius || prevProps.options.heat_blur !== this.props.options.heat_blur || prevProps.options.heat_opacity !== this.props.options.heat_opacity) {
       if (this.props.options.heatmapLayer) {
-        var _d = this.props.options,
-            heat_radius = _d.heat_radius,
-            heat_blur = _d.heat_blur,
-            heat_opacity = _d.heat_opacity;
+        var _c = this.props.options,
+            heat_radius = _c.heat_radius,
+            heat_blur = _c.heat_blur,
+            heat_opacity = _c.heat_opacity;
         this.heatmapLayer.setRadius(parseInt(heat_radius, 10));
         this.heatmapLayer.setBlur(parseInt(heat_blur, 10));
         this.heatmapLayer.setOpacity(parseFloat(heat_opacity));
@@ -52230,10 +52202,10 @@ function (_super) {
 
     if (prevProps.options.marker_radius !== this.props.options.marker_radius || prevProps.options.marker_color !== this.props.options.marker_color || prevProps.options.marker_stroke !== this.props.options.marker_stroke) {
       if (this.props.options.markersLayer) {
-        var _e = this.props.options,
-            marker_radius = _e.marker_radius,
-            marker_color = _e.marker_color,
-            marker_stroke = _e.marker_stroke;
+        var _d = this.props.options,
+            marker_radius = _d.marker_radius,
+            marker_color = _d.marker_color,
+            marker_stroke = _d.marker_stroke;
         this.map.removeLayer(this.markersLayer);
         this.markersLayer.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_8__["Style"]({
           image: new ol_style__WEBPACK_IMPORTED_MODULE_8__["Circle"]({
@@ -52517,11 +52489,11 @@ var processData = function processData(data) {
       text: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Text"]({
         stroke: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Stroke"]({
           color: '#fff',
-          width: 2
+          width: 1
         }),
-        font: '14px Calibri,sans-serif',
+        font: '12px Calibri,sans-serif',
         text: data.fields[4].values.buffer[i],
-        offsetY: 0
+        offsetY: -15
       })
     }));
     dataPoints.push(pointFeature);

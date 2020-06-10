@@ -147,7 +147,13 @@ export class MainPanel extends PureComponent<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
-      const { markersLayer, marker_radius, marker_color, marker_stroke, heatmapLayer, heat_blur, heat_radius, heat_opacity } = this.props.options;
+      const {
+        markersLayer,
+        /* marker_radius, marker_color, marker_stroke,  */ heatmapLayer,
+        heat_blur,
+        heat_radius,
+        heat_opacity,
+      } = this.props.options;
 
       const prevFields = prevProps.data.series[0].fields as FieldBuffer[];
       const newFields = this.props.data.series[0].fields as FieldBuffer[];
@@ -168,7 +174,7 @@ export class MainPanel extends PureComponent<Props> {
         this.markersLayer = new VectorLayer({
           source: vectorSource,
           zIndex: 2,
-          style: new Style({
+          /*           style: new Style({
             image: new CircleStyle({
               radius: marker_radius,
               fill: new Fill({ color: marker_color }),
@@ -177,7 +183,7 @@ export class MainPanel extends PureComponent<Props> {
                 width: 1,
               }),
             }),
-          }),
+          }), */
         });
         this.map.addLayer(this.markersLayer);
       }
@@ -197,13 +203,13 @@ export class MainPanel extends PureComponent<Props> {
     if (prevProps.options.markersLayer !== this.props.options.markersLayer && this.props.options.markersLayer) {
       this.map.removeLayer(this.heatmapLayer);
 
-      const { marker_radius, marker_color, marker_stroke } = this.props.options;
+      // const { marker_radius, marker_color, marker_stroke } = this.props.options;
       const vectorSource = processData(this.props.data.series[0] as Frame);
 
       this.markersLayer = new VectorLayer({
         source: vectorSource,
         zIndex: 2,
-        style: new Style({
+        /*         style: new Style({
           image: new CircleStyle({
             radius: marker_radius,
             fill: new Fill({ color: marker_color }),
@@ -212,7 +218,7 @@ export class MainPanel extends PureComponent<Props> {
               width: 1,
             }),
           }),
-        }),
+        }), */
       });
       this.map.addLayer(this.markersLayer);
     }

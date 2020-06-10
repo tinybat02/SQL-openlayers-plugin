@@ -26,11 +26,11 @@ const processData = (data: Frame) => {
         text: new Text({
           stroke: new Stroke({
             color: '#fff',
-            width: 2,
+            width: 1,
           }),
-          font: '14px Calibri,sans-serif',
+          font: '12px Calibri,sans-serif',
           text: data.fields[4].values.buffer[i],
-          offsetY: 0,
+          offsetY: -15,
         }),
       })
     );
