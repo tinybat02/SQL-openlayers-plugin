@@ -20,7 +20,7 @@ const processData = (data: Frame) => {
     pointFeature.setStyle(
       new Style({
         image: new Circle({
-          radius: data.fields[5].values.buffer[i] * 12,
+          radius: data.fields[5].values.buffer[i],
           fill: new Fill({ color: 'rgba(73,168,222,0.3)' }),
           stroke: new Stroke({
             color: '#fff',
